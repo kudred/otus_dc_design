@@ -1,28 +1,169 @@
-### Lab01.  Основы проектирования сети.
+# Lab01.  Основы проектирования сети.
+
+## Задание:
+1. Собрать топологию CLOS, как на схеме;
+2. Распределить адресное пространство для Underlay сети;
+3. Зафиксировать в документации план работ, адресное пространство, схему сети, настройки.
+
+### Схема сети:
+![](lab01-01.jpg)
+
+## Выполнение
+Выделим адресное пространство.
+
+Для IPv4 будем использовать адреса из сети 10.0.0.0/13 (RFC 1918).
+
+Для IPv6 будем использовать случайно сгенерированный Unique Local префикс fdcd:c467:a7d3::0/48 (RFC 4193).
+
+### Таблица сетей:
+|Сеть IPv4|Сеть IPv6|Назначение|
+|--|--|--|
+|10.0.0.0/13    |fdcd:c467:a7d3:1::0/64     |Весь диапазон|
+|10.0.0.0/24    |fdcd:c467:a7d3:1:0::0/80   |Loopback 1|
+|10.1.0.0/24    |fdcd:c467:a7d3:1:1::0/80   |Loopback 2|
+|10.2.0.0/24    |-                          |peer to peer линки|
+|10.3.0.0/24    |-                          |Резерв|
+|10.4.0.0/14    |-                          |Сервисы|
 
 
-|Устройство|Интерфейс|Адрес|Назначение|
-|--|--|--|--|
-|Spine101|Lo0|10.0.0.101/32|Loopback 1|
-|				 |Lo1|10.1.0.101/32|Loopback 2|
-|				 |Et1|10.2.101.0/31|p2p to Leaf1|
-|				 |Et2|10.2.101.2/31|p2p to Leaf2|
-|				 |Et3|10.2.101.4/31|p2p to Leaf3|
-|Spine102|Lo0|10.0.0.102/32|Loopback 1|
-|				 |Lo1|10.1.0.102/32|Loopback 2|
-|				 |Et1|10.2.102.0/31|p2p to Leaf1|
-|				 |Et2|10.2.102.2/31|p2p to Leaf2|
-|				 |Et3|10.2.102.4/31|p2p to Leaf3|
-|Leaf1   |Lo0|10.0.0.1/32|Loopback 1|
-|				 |Lo1|10.1.0.1/32|Loopback 2|
-|				 |Et1|10.2.101.1/31|p2p to Spine101|
-|				 |Et2|10.2.102.1/31|p2p to Spine102|
-|Leaf2   |Lo0|10.0.0.2/32|Loopback 1|
-|				 |Lo1|10.1.0.2/32|Loopback 2|
-|				 |Et1|10.2.101.3/31|p2p to Spine101|
-|				 |Et2|10.2.102.3/31|p2p to Spine102|
-|Leaf3   |Lo0|10.0.0.3/32|Loopback 1|
-|				 |Lo1|10.1.0.3/32|Loopback 2|
-|				 |Et1|10.2.101.5/31|p2p to Spine101|
-|				 |Et2|10.2.102.5/31|p2p to Spine102|
+### Соберем схему в PNETLab:
+![](lab01-02.png)
+
+Назначим адреса на устройства, согласно таблице.
+
+### Таблица адресов:
+|Устройство|Интерфейс|Адрес IPv4|Адрес IPv6|Назначение|
+|--|--|--|--|--|
+|Spine01    |Lo0    |10.0.0.1/32    |fdcd:c467:a7d3:1:0::1/128  |Loopback 1|
+|           |Lo1    |10.1.0.1/32    |fdcd:c467:a7d3:1:1::1/128  |Loopback 2|
+|			|Eth1   |10.2.1.0/31    |-                          |p2p to Leaf1|
+|			|Eth1   |-              |fe80::1/64                 |Link-local|
+|			|Eth2   |10.2.1.2/31    |-                          |p2p to Leaf2|
+|			|Eth2   |-              |fe80::1/64                 |Link-local|
+|			|Eth3   |10.2.1.4/31    |-                          |p2p to Leaf3|
+|			|Eth3   |-              |fe80::1/64                 |Link-local|
+|Spine02    |Lo0    |10.0.0.2/32    |fdcd:c467:a7d3:1:0::2/128  |Loopback 1|
+|			|Lo1    |10.1.0.2/32    |fdcd:c467:a7d3:1:1::2/128  |Loopback 2|
+|			|Eth1   |10.2.2.0/31    |-                          |p2p to Leaf1|
+|			|Eth1   |-              |fe80::2/64                 |Link-local|
+|			|Eth2   |10.2.2.2/31    |-                          |p2p to Leaf2|
+|			|Eth2   |-              |fe80::2/64                 |Link-local|
+|			|Eth3   |10.2.2.4/31    |-                          |p2p to Leaf3|
+|			|Eth3   |-              |fe80::2/64                 |Link-local|
+|Leaf01     |Lo0    |10.0.0.3/32    |fdcd:c467:a7d3:1:0::3/128  |Loopback 1|
+|			|Lo1    |10.1.0.3/32    |fdcd:c467:a7d3:1:1::3/128  |Loopback 2|
+|			|Eth1   |10.2.1.1/31    |-                          |p2p to Spine01|
+|			|Eth1   |-              |fe80::3/64                 |Link-local|
+|			|Eth2   |10.2.2.1/31    |-                          |p2p to Spine02|
+|			|Eth2   |-              |fe80::3/64                 |Link-local|
+|Leaf02     |Lo0    |10.0.0.4/32    |fdcd:c467:a7d3:1:0::4/128  |Loopback 1|
+|			|Lo1    |10.1.0.4/32    |fdcd:c467:a7d3:1:1::4/128  |Loopback 2|
+|			|Eth1   |10.2.1.3/31    |-                          |p2p to Spine01|
+|			|Eth1   |-              |fe80::4/64                 |Link-local|
+|			|Eth2   |10.2.2.3/31    |-                          |p2p to Spine02|
+|			|Eth2   |-              |fe80::4/64                 |Link-local|
+|Leaf03     |Lo0    |10.0.0.5/32    |fdcd:c467:a7d3:1:0::5/128  |Loopback 1|
+|			|Lo1    |10.1.0.5/32    |fdcd:c467:a7d3:1:1::5/128  |Loopback 2|
+|			|Eth1   |10.2.1.5/31    |-                          |p2p to Spine01|
+|			|Eth1   |-              |fe80::5/64                 |Link-local|
+|			|Eth2   |10.2.2.5/31    |-                          |p2p to Spine02|
+|			|Eth2   |-              |fe80::5/64                 |Link-local|
+
+
+Для примера приведем конфигурации Spine01 и Leaf01.
+
+### конфигурация Spine01:
+```
+Spine01(config)
+interface loopback 0
+    ip address 10.0.0.1/32
+    ipv6 enable
+    ipv6 address fdcd:c467:a7d3:1:0::1/128
+
+interface loopback 1
+    ip address 10.1.0.1/32
+    ipv6 enable
+    ipv6 address fdcd:c467:a7d3:1:1::1/128
+
+interface ethernet 1 - 8
+    ipv6 address fe80::1 link-local
+
+interface ethernet 1
+    description p2p to Leaf01
+    mac-address 00:00:00:01:00:01
+    no switchport
+    ip address 10.2.1.0/31
+    ipv6 enable
+
+interface ethernet 2
+    description p2p to Leaf02
+    mac-address 00:00:00:01:00:02
+    no switchport
+    ip address 10.2.1.2/31
+    ipv6 enable
+
+interface ethernet 3
+    description p2p to Leaf03
+    mac-address 00:00:00:01:00:03
+    no switchport
+    ip address 10.2.1.4/31
+    ipv6 enable
+
+interface ethernet 4
+    mac-address 00:00:00:01:00:04
+interface ethernet 5
+    mac-address 00:00:00:01:00:05
+interface ethernet 6
+    mac-address 00:00:00:01:00:06
+interface ethernet 7
+    mac-address 00:00:00:01:00:07
+interface ethernet 8
+    mac-address 00:00:00:01:00:08
+```
+
+
+### конфигурация Leaf01:
+```
+Leaf01(config)
+interface loopback 0
+    ip address 10.0.0.3/32
+    ipv6 enable
+    ipv6 address fdcd:c467:a7d3:1:0::3/128
+
+interface loopback 1
+    ip address 10.1.0.3/32
+    ipv6 enable
+    ipv6 address fdcd:c467:a7d3:1:1::3/128
+
+interface ethernet 1 - 8
+    ipv6 address fe80::3 link-local
+
+interface ethernet 1
+    description p2p to Spine01
+    mac-address 00:00:00:03:00:01
+    no switchport
+    ip address 10.2.1.1/31
+    ipv6 enable
+
+interface ethernet 2
+    description p2p to Spine02
+    mac-address 00:00:00:03:00:02
+    no switchport
+    ip address 10.2.2.1/31
+    ipv6 enable
+
+interface ethernet 3
+    mac-address 00:00:00:03:00:03
+interface ethernet 4
+    mac-address 00:00:00:03:00:04
+interface ethernet 5
+    mac-address 00:00:00:03:00:05
+interface ethernet 6
+    mac-address 00:00:00:03:00:06
+interface ethernet 7
+    mac-address 00:00:00:03:00:07
+interface ethernet 8
+    mac-address 00:00:00:03:00:08
+```
+
 
