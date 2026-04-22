@@ -64,13 +64,128 @@
 |			|Et2   |10.2.2.5/31    |fe80::5/64                 |p2p to Spine02|
 
 
+Проверим IP связанность между Spine01 и Leaf01:
+```
+Spine01#ping 10.2.1.1
+PING 10.2.1.1 (10.2.1.1) 72(100) bytes of data.
+80 bytes from 10.2.1.1: icmp_seq=1 ttl=64 time=5.33 ms
+80 bytes from 10.2.1.1: icmp_seq=2 ttl=64 time=2.41 ms
+80 bytes from 10.2.1.1: icmp_seq=3 ttl=64 time=3.20 ms
+80 bytes from 10.2.1.1: icmp_seq=4 ttl=64 time=2.19 ms
+80 bytes from 10.2.1.1: icmp_seq=5 ttl=64 time=1.44 ms
+--- 10.2.1.1 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 20ms
+rtt min/avg/max/mdev = 1.442/2.912/5.326/1.329 ms, ipg/ewma 4.937/4.049 ms
+
+Spine01#ping fe80::3 interface ethernet 1
+PING fe80::3%et1(fe80::3%et1) 52 data bytes
+60 bytes from fe80::3%et1: icmp_seq=1 ttl=64 time=3.41 ms
+60 bytes from fe80::3%et1: icmp_seq=2 ttl=64 time=3.65 ms
+60 bytes from fe80::3%et1: icmp_seq=3 ttl=64 time=2.71 ms
+60 bytes from fe80::3%et1: icmp_seq=4 ttl=64 time=3.11 ms
+60 bytes from fe80::3%et1: icmp_seq=5 ttl=64 time=3.59 ms
+--- fe80::3%et1 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 16ms
+rtt min/avg/max/mdev = 2.706/3.295/3.653/0.350 ms, ipg/ewma 3.929/3.355 ms
+```
+
+Проверим IP связанность между Spine01 и Leaf02:
+```
+Spine01#ping 10.2.1.3
+PING 10.2.1.3 (10.2.1.3) 72(100) bytes of data.
+80 bytes from 10.2.1.3: icmp_seq=1 ttl=64 time=5.10 ms
+80 bytes from 10.2.1.3: icmp_seq=2 ttl=64 time=2.88 ms
+80 bytes from 10.2.1.3: icmp_seq=3 ttl=64 time=1.89 ms
+80 bytes from 10.2.1.3: icmp_seq=4 ttl=64 time=1.59 ms
+80 bytes from 10.2.1.3: icmp_seq=5 ttl=64 time=2.18 ms
+--- 10.2.1.3 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 19ms
+rtt min/avg/max/mdev = 1.590/2.728/5.101/1.261 ms, ipg/ewma 4.674/3.858 ms
+
+Spine01#ping fe80::4 interface ethernet 2
+PING fe80::4%et2(fe80::4%et2) 52 data bytes
+60 bytes from fe80::4%et2: icmp_seq=1 ttl=64 time=2.96 ms
+60 bytes from fe80::4%et2: icmp_seq=2 ttl=64 time=3.12 ms
+60 bytes from fe80::4%et2: icmp_seq=3 ttl=64 time=1.64 ms
+60 bytes from fe80::4%et2: icmp_seq=4 ttl=64 time=2.14 ms
+60 bytes from fe80::4%et2: icmp_seq=5 ttl=64 time=2.26 ms
+--- fe80::4%et2 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 13ms
+rtt min/avg/max/mdev = 1.639/2.423/3.118/0.545 ms, ipg/ewma 3.354/2.668 ms
+```
+
+Проверим IP связанность между Spine01 и Leaf03:
+```
+Spine01#ping 10.2.1.5
+PING 10.2.1.5 (10.2.1.5) 72(100) bytes of data.
+80 bytes from 10.2.1.5: icmp_seq=1 ttl=64 time=3.93 ms
+80 bytes from 10.2.1.5: icmp_seq=2 ttl=64 time=3.53 ms
+80 bytes from 10.2.1.5: icmp_seq=3 ttl=64 time=3.19 ms
+80 bytes from 10.2.1.5: icmp_seq=4 ttl=64 time=1.98 ms
+80 bytes from 10.2.1.5: icmp_seq=5 ttl=64 time=1.85 ms
+--- 10.2.1.5 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 19ms
+rtt min/avg/max/mdev = 1.849/2.896/3.934/0.835 ms, ipg/ewma 4.854/3.354 ms
+
+Spine01#ping fe80::5 interface ethernet 3
+PING fe80::5%et3(fe80::5%et3) 52 data bytes
+60 bytes from fe80::5%et3: icmp_seq=1 ttl=64 time=5.43 ms
+60 bytes from fe80::5%et3: icmp_seq=2 ttl=64 time=3.38 ms
+60 bytes from fe80::5%et3: icmp_seq=3 ttl=64 time=3.25 ms
+60 bytes from fe80::5%et3: icmp_seq=4 ttl=64 time=4.23 ms
+60 bytes from fe80::5%et3: icmp_seq=5 ttl=64 time=3.20 ms
+--- fe80::5%et3 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 21ms
+rtt min/avg/max/mdev = 3.199/3.896/5.432/0.853 ms, ipg/ewma 5.218/4.640 ms
+```
+
+Аналогично проверим IP связанность между Spine02 и Leafs (вывод сокращён):
+```
+Spine02#ping 10.2.2.1
+Spine02#ping 10.2.2.3
+Spine02#ping 10.2.2.5
+Spine02#ping fe80::3 interface ethernet 1
+Spine02#ping fe80::4 interface ethernet 2
+Spine02#ping fe80::5 interface ethernet 3
+```
+
+Настроим OSPFv2 и OSPFv3.
+
+Все устройства будут в одной зоне 0.0.0.0 (backbone).
+
+В качестве RouterID будем использовать адрес интерфейса Loopback0.
+
+Все интерфейсы в OSPF по-умолчанию сделаем пассивными.
+
+Для автоматического расчета стоимости линков в OSPF будем использовать reference-bandwidth = 1 Терабит/c.
+
+На p2p интерфейсах увеличим MTU, включим BFD и настроим аутентификацию для OSPF.
+
+
+
+
 Для примера приведем конфигурации Spine01 и Leaf01.
 
 ### конфигурация Spine01:
 ```
-Spine01(config)
-
+Spine01(config)#
 hostname Spine01
+
+ip routing
+ipv6 unicast-routing
+no logging console
+
+router ospf 1
+	router-id 10.0.0.1
+	passive-interface default
+	no passive-interface ethernet 1-3
+	auto-cost reference-bandwidth 1000000
+
+ipv6 router ospf 1
+	router-id 10.0.0.1
+	passive-interface default
+	no passive-interface ethernet 1-3
+	auto-cost reference-bandwidth 1000000
 
 interface Management1
     mac-address 00:00:00:01:01:01
@@ -80,14 +195,27 @@ interface loopback 0
     ip address 10.0.0.1/32
     ipv6 enable
     ipv6 address fdcd:c467:a7d3:1:0::1/128
+	ip ospf area 0.0.0.0
+	ipv6 ospf 1 area 0.0.0.0
 
 interface loopback 1
     ip address 10.1.0.1/32
     ipv6 enable
     ipv6 address fdcd:c467:a7d3:1:1::1/128
 
-interface ethernet 1 - 3
+interface ethernet 1-3
     ipv6 address fe80::1 link-local
+	mtu 9214
+	ip ospf network point-to-point
+	ip ospf area 0.0.0.0
+	ip ospf authentication message-digest
+	ip ospf message-digest-key 1 md5 0 P@$$w0rd
+	bfd interval 100 min-rx 100 multiplier 3
+	ip ospf neighbor bfd
+	ipv6 ospf network point-to-point
+	ipv6 ospf 1 area 0.0.0.0
+	ipv6 ospf authentication ipsec spi 1000 md5 passphrase 0 P@$$w0rd6
+	ipv6 ospf bfd
 
 interface ethernet 1
     description p2p to Leaf01
@@ -120,6 +248,7 @@ interface ethernet 7
     mac-address 00:00:00:01:00:07
 interface ethernet 8
     mac-address 00:00:00:01:00:08
+
 ```
 
 
