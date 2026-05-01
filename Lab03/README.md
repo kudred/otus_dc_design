@@ -64,83 +64,15 @@
 |			|Et2   |10.2.2.5/31    |fe80::5/64                 |p2p to Spine02|
 
 
-Проверим IP связанность между Spine01 и Leaf01:
+Проверим IP связанность между Spine и Leaf (вывод сокращён):
 ```
 Spine01#ping 10.2.1.1
-PING 10.2.1.1 (10.2.1.1) 72(100) bytes of data.
-80 bytes from 10.2.1.1: icmp_seq=1 ttl=64 time=5.33 ms
-80 bytes from 10.2.1.1: icmp_seq=2 ttl=64 time=2.41 ms
-80 bytes from 10.2.1.1: icmp_seq=3 ttl=64 time=3.20 ms
-80 bytes from 10.2.1.1: icmp_seq=4 ttl=64 time=2.19 ms
-80 bytes from 10.2.1.1: icmp_seq=5 ttl=64 time=1.44 ms
---- 10.2.1.1 ping statistics ---
-5 packets transmitted, 5 received, 0% packet loss, time 20ms
-rtt min/avg/max/mdev = 1.442/2.912/5.326/1.329 ms, ipg/ewma 4.937/4.049 ms
-
-Spine01#ping fe80::3 interface ethernet 1
-PING fe80::3%et1(fe80::3%et1) 52 data bytes
-60 bytes from fe80::3%et1: icmp_seq=1 ttl=64 time=3.41 ms
-60 bytes from fe80::3%et1: icmp_seq=2 ttl=64 time=3.65 ms
-60 bytes from fe80::3%et1: icmp_seq=3 ttl=64 time=2.71 ms
-60 bytes from fe80::3%et1: icmp_seq=4 ttl=64 time=3.11 ms
-60 bytes from fe80::3%et1: icmp_seq=5 ttl=64 time=3.59 ms
---- fe80::3%et1 ping statistics ---
-5 packets transmitted, 5 received, 0% packet loss, time 16ms
-rtt min/avg/max/mdev = 2.706/3.295/3.653/0.350 ms, ipg/ewma 3.929/3.355 ms
-```
-
-Проверим IP связанность между Spine01 и Leaf02:
-```
 Spine01#ping 10.2.1.3
-PING 10.2.1.3 (10.2.1.3) 72(100) bytes of data.
-80 bytes from 10.2.1.3: icmp_seq=1 ttl=64 time=5.10 ms
-80 bytes from 10.2.1.3: icmp_seq=2 ttl=64 time=2.88 ms
-80 bytes from 10.2.1.3: icmp_seq=3 ttl=64 time=1.89 ms
-80 bytes from 10.2.1.3: icmp_seq=4 ttl=64 time=1.59 ms
-80 bytes from 10.2.1.3: icmp_seq=5 ttl=64 time=2.18 ms
---- 10.2.1.3 ping statistics ---
-5 packets transmitted, 5 received, 0% packet loss, time 19ms
-rtt min/avg/max/mdev = 1.590/2.728/5.101/1.261 ms, ipg/ewma 4.674/3.858 ms
-
-Spine01#ping fe80::4 interface ethernet 2
-PING fe80::4%et2(fe80::4%et2) 52 data bytes
-60 bytes from fe80::4%et2: icmp_seq=1 ttl=64 time=2.96 ms
-60 bytes from fe80::4%et2: icmp_seq=2 ttl=64 time=3.12 ms
-60 bytes from fe80::4%et2: icmp_seq=3 ttl=64 time=1.64 ms
-60 bytes from fe80::4%et2: icmp_seq=4 ttl=64 time=2.14 ms
-60 bytes from fe80::4%et2: icmp_seq=5 ttl=64 time=2.26 ms
---- fe80::4%et2 ping statistics ---
-5 packets transmitted, 5 received, 0% packet loss, time 13ms
-rtt min/avg/max/mdev = 1.639/2.423/3.118/0.545 ms, ipg/ewma 3.354/2.668 ms
-```
-
-Проверим IP связанность между Spine01 и Leaf03:
-```
 Spine01#ping 10.2.1.5
-PING 10.2.1.5 (10.2.1.5) 72(100) bytes of data.
-80 bytes from 10.2.1.5: icmp_seq=1 ttl=64 time=3.93 ms
-80 bytes from 10.2.1.5: icmp_seq=2 ttl=64 time=3.53 ms
-80 bytes from 10.2.1.5: icmp_seq=3 ttl=64 time=3.19 ms
-80 bytes from 10.2.1.5: icmp_seq=4 ttl=64 time=1.98 ms
-80 bytes from 10.2.1.5: icmp_seq=5 ttl=64 time=1.85 ms
---- 10.2.1.5 ping statistics ---
-5 packets transmitted, 5 received, 0% packet loss, time 19ms
-rtt min/avg/max/mdev = 1.849/2.896/3.934/0.835 ms, ipg/ewma 4.854/3.354 ms
-
+Spine01#ping fe80::3 interface ethernet 1
+Spine01#ping fe80::4 interface ethernet 2
 Spine01#ping fe80::5 interface ethernet 3
-PING fe80::5%et3(fe80::5%et3) 52 data bytes
-60 bytes from fe80::5%et3: icmp_seq=1 ttl=64 time=5.43 ms
-60 bytes from fe80::5%et3: icmp_seq=2 ttl=64 time=3.38 ms
-60 bytes from fe80::5%et3: icmp_seq=3 ttl=64 time=3.25 ms
-60 bytes from fe80::5%et3: icmp_seq=4 ttl=64 time=4.23 ms
-60 bytes from fe80::5%et3: icmp_seq=5 ttl=64 time=3.20 ms
---- fe80::5%et3 ping statistics ---
-5 packets transmitted, 5 received, 0% packet loss, time 21ms
-rtt min/avg/max/mdev = 3.199/3.896/5.432/0.853 ms, ipg/ewma 5.218/4.640 ms
-```
 
-Аналогично проверим IP связанность между Spine02 и Leafs (вывод сокращён):
-```
 Spine02#ping 10.2.2.1
 Spine02#ping 10.2.2.3
 Spine02#ping 10.2.2.5
@@ -149,18 +81,15 @@ Spine02#ping fe80::4 interface ethernet 2
 Spine02#ping fe80::5 interface ethernet 3
 ```
 
-Настроим OSPFv2 и OSPFv3.
+Настроим IS-IS для IPv4 и IPv6.
 
-Все устройства будут в одной зоне 0.0.0.0 (backbone).
+Все устройства будут в одной зоне 49.0001 и будут строить отношения уровня 1 и 2.
 
 В качестве RouterID будем использовать адрес интерфейса Loopback0.
 
-Все интерфейсы в OSPF по-умолчанию сделаем пассивными.
+Интерфейсы Loopback0 и другие, не участвующие в IS-IS, сдлаем пассивными.
 
-Для автоматического расчета стоимости линков в OSPF будем использовать reference-bandwidth = 1 Терабит/c.
-
-На p2p интерфейсах увеличим MTU, включим BFD, настроим аутентификацию для OSPF и изменим тип линков на point-to-point.
-
+Включим BFD, настроим аутентификацию для IS-IS и изменим тип линков на point-to-point.
 
 
 
@@ -175,17 +104,14 @@ ip routing
 ipv6 unicast-routing
 no logging console
 
-router ospf 1
-	router-id 10.0.0.1
-	passive-interface default
-	no passive-interface ethernet 1-3
-	auto-cost reference-bandwidth 1000000
-
-ipv6 router ospf 1
-	router-id 10.0.0.1
-	passive-interface default
-	no passive-interface ethernet 1-3
-	auto-cost reference-bandwidth 1000000
+router isis UNDERISIS
+	net 49.0001.0100.0000.0001.00
+	router-id ipv4 10.0.0.1
+	log-adjacency-changes
+	address-family ipv4 unicast
+	address-family ipv6 unicast
+	authentication mode md5
+	authentication key P@$$w0rd
 
 interface Management1
     mac-address 00:00:00:01:01:01
@@ -195,48 +121,44 @@ interface loopback 0
     ip address 10.0.0.1/32
     ipv6 enable
     ipv6 address fdcd:c467:a7d3:1:0::1/128
-	ip ospf area 0.0.0.0
-	ipv6 ospf 1 area 0.0.0.0
+    isis enable UNDERISIS
+	isis passive
 
 interface loopback 1
     ip address 10.1.0.1/32
     ipv6 enable
     ipv6 address fdcd:c467:a7d3:1:1::1/128
+	isis passive
 
 interface ethernet 1-3
+    no switchport
+    ipv6 enable
     ipv6 address fe80::1 link-local
-	mtu 9214
-	ip ospf network point-to-point
-	ip ospf area 0.0.0.0
-	ip ospf authentication message-digest
-	ip ospf message-digest-key 1 md5 0 P@$$w0rd
 	bfd interval 100 min-rx 100 multiplier 3
-	ip ospf neighbor bfd
-	ipv6 ospf network point-to-point
-	ipv6 ospf 1 area 0.0.0.0
-	ipv6 ospf authentication ipsec spi 1000 md5 passphrase 0 P@$$w0rd6
-	ipv6 ospf bfd
+	isis authentication mode md5
+	isis authentication key P@$$w0rd
+    isis enable UNDERISIS
+    isis bfd
+    isis ipv6 bfd
+    isis network point-to-point
 
 interface ethernet 1
     description p2p to Leaf01
     mac-address 00:00:00:01:00:01
-    no switchport
     ip address 10.2.1.0/31
-    ipv6 enable
 
 interface ethernet 2
     description p2p to Leaf02
     mac-address 00:00:00:01:00:02
-    no switchport
     ip address 10.2.1.2/31
-    ipv6 enable
 
 interface ethernet 3
     description p2p to Leaf03
     mac-address 00:00:00:01:00:03
-    no switchport
     ip address 10.2.1.4/31
-    ipv6 enable
+
+interface ethernet 4-8
+	isis passive
 
 interface ethernet 4
     mac-address 00:00:00:01:00:04
@@ -261,19 +183,15 @@ ip routing
 ipv6 unicast-routing
 no logging console
 
-router ospf 1
-	router-id 10.0.0.3
-	max-lsa 12000
-	passive-interface default
-	no passive-interface ethernet 1-2
-	auto-cost reference-bandwidth 1000000
+router isis UNDERISIS
+	net 49.0001.0100.0000.0003.00
+	router-id ipv4 10.0.0.3
+	log-adjacency-changes
+	address-family ipv4 unicast
+	address-family ipv6 unicast
+	authentication mode md5
+	authentication key P@$$w0rd
 
-ipv6 router ospf 1
-	router-id 10.0.0.3
-	passive-interface default
-	no passive-interface ethernet 1-2
-	auto-cost reference-bandwidth 1000000
-	
 interface Management1
     mac-address 00:00:00:03:01:01
 	ip address 172.16.0.3/24
@@ -282,41 +200,39 @@ interface loopback 0
     ip address 10.0.0.3/32
     ipv6 enable
     ipv6 address fdcd:c467:a7d3:1:0::3/128
-	ip ospf area 0.0.0.0
-	ipv6 ospf 1 area 0.0.0.0
+    isis enable UNDERISIS
+	isis passive
 
 interface loopback 1
     ip address 10.1.0.3/32
     ipv6 enable
     ipv6 address fdcd:c467:a7d3:1:1::3/128
+	isis passive
 
 interface ethernet 1-2
+    no switchport
+    ipv6 enable
     ipv6 address fe80::3 link-local
-	mtu 9214
-	ip ospf network point-to-point
-	ip ospf area 0.0.0.0
-	ip ospf authentication message-digest
-	ip ospf message-digest-key 1 md5 0 P@$$w0rd
 	bfd interval 100 min-rx 100 multiplier 3
-	ip ospf neighbor bfd
-	ipv6 ospf network point-to-point
-	ipv6 ospf 1 area 0.0.0.0
-	ipv6 ospf authentication ipsec spi 1000 md5 passphrase 0 P@$$w0rd6
-	ipv6 ospf bfd
+	isis authentication key P@$$w0rd
+	isis authentication mode md5
+    isis enable UNDERISIS
+    isis bfd
+    isis ipv6 bfd
+    isis network point-to-point
 
 interface ethernet 1
     description p2p to Spine01
     mac-address 00:00:00:03:00:01
-    no switchport
     ip address 10.2.1.1/31
-    ipv6 enable
 
 interface ethernet 2
     description p2p to Spine02
     mac-address 00:00:00:03:00:02
-    no switchport
     ip address 10.2.2.1/31
-    ipv6 enable
+
+interface ethernet 3-8
+	isis passive
 
 interface ethernet 3
     mac-address 00:00:00:03:00:03
@@ -333,70 +249,114 @@ interface ethernet 8
 ```
 
 
-На Spine01 проверим установление соседских отношений по IPv4:
+На Spine01 проверим установление соседских отношений:
 ```
-Spine01#show ip ospf neighbor
-Neighbor ID     Instance VRF      Pri State                  Dead Time   Address         Interface
-10.0.0.3        1        default  0   FULL                   00:00:36    10.2.1.1        Ethernet1
-10.0.0.4        1        default  0   FULL                   00:00:31    10.2.1.3        Ethernet2
-10.0.0.5        1        default  0   FULL                   00:00:32    10.2.1.5        Ethernet3
+Spine01#show isis neighbors detail
+
+Instance  VRF      System Id        Type Interface          SNPA              State Hold time   Circuit Id
+UNDERISIS default  Leaf01           L1L2 Ethernet1          P2P               UP    20          11
+  Area addresses: 49.0001
+  SNPA: P2P
+  Router ID: 0.0.0.0
+  Advertised Hold Time: 30
+  State Changed: 00:17:22 ago at 2026-04-28 18:53:23
+  IPv4 Interface Address: 10.2.1.1
+  IPv6 Interface Address: fe80::3
+  Interface name: Ethernet1
+  Graceful Restart: Supported
+  BFD IPv4 state is up
+  BFD IPv6 state is up
+  Supported Address Families: IPv4, IPv6
+  Neighbor Supported Address Families: IPv4, IPv6
+UNDERISIS default  Leaf02           L1L2 Ethernet2          P2P               UP    23          15
+  Area addresses: 49.0001
+  SNPA: P2P
+  Router ID: 0.0.0.0
+  Advertised Hold Time: 30
+  State Changed: 00:05:07 ago at 2026-04-28 19:05:38
+  IPv4 Interface Address: 10.2.1.3
+  IPv6 Interface Address: fe80::4
+  Interface name: Ethernet2
+  Graceful Restart: Supported
+  BFD IPv4 state is up
+  BFD IPv6 state is up
+  Supported Address Families: IPv4, IPv6
+  Neighbor Supported Address Families: IPv4, IPv6
+UNDERISIS default  Leaf03           L1L2 Ethernet3          P2P               UP    22          16
+  Area addresses: 49.0001
+  SNPA: P2P
+  Router ID: 0.0.0.0
+  Advertised Hold Time: 30
+  State Changed: 00:02:17 ago at 2026-04-28 19:08:28
+  IPv4 Interface Address: 10.2.1.5
+  IPv6 Interface Address: fe80::5
+  Interface name: Ethernet3
+  Graceful Restart: Supported
+  BFD IPv4 state is up
+  BFD IPv6 state is up
+  Supported Address Families: IPv4, IPv6
+  Neighbor Supported Address Families: IPv4, IPv6
 ```
-и по IPv6:
+Видим, что соседские отношения установлены. У всех состояние UP. Уровень отношений смешанный L1/L2. BFD вклюен. Тип линков p2p.
+
+
+Посмотрим LSDB:
 ```
-Spine01#show ipv6 ospf neighbor
-Routing Process "ospf 1":
-Neighbor 10.0.0.4 VRF default priority is 0, state is Full
-  In area 0.0.0.0 interface Ethernet2
-  Adjacency was established 00:00:43 ago
-  Current state was established 00:00:43 ago
-  DR is None BDR is None
-  Options is E R V6
-  Dead timer is due in 35 seconds
-  Bfd request is sent and the state is Up
-  Graceful-restart-helper mode is Inactive
-  Graceful-restart attempts: 0
-Neighbor 10.0.0.5 VRF default priority is 0, state is Full
-  In area 0.0.0.0 interface Ethernet3
-  Adjacency was established 00:00:14 ago
-  Current state was established 00:00:14 ago
-  DR is None BDR is None
-  Options is E R V6
-  Dead timer is due in 34 seconds
-  Bfd request is sent and the state is Up
-  Graceful-restart-helper mode is Inactive
-  Graceful-restart attempts: 0
-Neighbor 10.0.0.3 VRF default priority is 0, state is Full
-  In area 0.0.0.0 interface Ethernet1
-  Adjacency was established 15:35:24 ago
-  Current state was established 15:35:24 ago
-  DR is None BDR is None
-  Options is E R V6
-  Dead timer is due in 35 seconds
-  Bfd request is sent and the state is Up
-  Graceful-restart-helper mode is Inactive
-  Graceful-restart attempts: 0
-  ```
+Spine01#show isis database
+Legend:
+H - hostname conflict
+U - node unreachable
+
+IS-IS Instance: UNDERISIS VRF: default
+  IS-IS Level 1 Link State Database
+    LSPID                   Seq Num  Cksum  Life Length IS  Received LSPID        Flags
+    Spine01.00-00                 8  24235  1149    209 L2  0100.0000.0001.00-00  <>
+    Spine02.00-00                 8  40476   840    209 L2  0100.0000.0002.00-00  <>
+    Leaf01.00-00                  6  35121   590    184 L2  0100.0000.0003.00-00  <>
+    Leaf02.00-00                  7  17229   957    184 L2  0100.0000.0004.00-00  <>
+    Leaf03.00-00                  7  64747  1188    184 L2  0100.0000.0005.00-00  <>
+  IS-IS Level 2 Link State Database
+    LSPID                   Seq Num  Cksum  Life Length IS  Received LSPID        Flags
+    Spine01.00-00                12  34916  1078    364 L2  0100.0000.0001.00-00  <>
+    Spine02.00-00                12  15082   874    364 L2  0100.0000.0002.00-00  <>
+    Leaf01.00-00                 10  61522   627    348 L2  0100.0000.0003.00-00  <>
+    Leaf02.00-00                 10  20125   887    348 L2  0100.0000.0004.00-00  <>
+    Leaf03.00-00                  8  25942  1056    348 L2  0100.0000.0005.00-00  <>
+```
+
+Посмотрим состояние интерфейсов:
+```
+Spine01#show isis interface brief
+IS-IS Instance: UNDERISIS VRF: default
+Interface Level IPv4 Metric IPv6 Metric Type           Adjacency
+--------- ----- ----------- ----------- -------------- ---------
+Ethernet1 L1L2           10          10 point-to-point         2
+Ethernet2 L1L2           10          10 point-to-point         2
+Ethernet3 L1L2           10          10 point-to-point         2
+Loopback0 L1L2           10          10 loopback       (passive)
+```
+Видим, что установился уровень отношений L1/L2, тип линков p2p, и по два соседства на каждый линк (L1 соседство + L2 соседство).
+
+
 
 
 На Spine01 проверим таблицу маршрутизации IPv4:
 ```
 Spine01#show ip route
-
 VRF: default
-
 Gateway of last resort is not set
 
  C        10.0.0.1/32
            directly connected, Loopback0
- O        10.0.0.2/32 [110/2010]
+ I L1     10.0.0.2/32 [115/30]
            via 10.2.1.1, Ethernet1
            via 10.2.1.3, Ethernet2
            via 10.2.1.5, Ethernet3
- O        10.0.0.3/32 [110/1010]
+ I L1     10.0.0.3/32 [115/20]
            via 10.2.1.1, Ethernet1
- O        10.0.0.4/32 [110/1010]
+ I L1     10.0.0.4/32 [115/20]
            via 10.2.1.3, Ethernet2
- O        10.0.0.5/32 [110/1010]
+ I L1     10.0.0.5/32 [115/20]
            via 10.2.1.5, Ethernet3
  C        10.1.0.1/32
            directly connected, Loopback1
@@ -406,14 +366,14 @@ Gateway of last resort is not set
            directly connected, Ethernet2
  C        10.2.1.4/31
            directly connected, Ethernet3
- O        10.2.2.0/31 [110/2000]
+ I L1     10.2.2.0/31 [115/20]
            via 10.2.1.1, Ethernet1
- O        10.2.2.2/31 [110/2000]
+ I L1     10.2.2.2/31 [115/20]
            via 10.2.1.3, Ethernet2
- O        10.2.2.4/31 [110/2000]
+ I L1     10.2.2.4/31 [115/20]
            via 10.2.1.5, Ethernet3
 ```
-Видим маршруты до Loopback интерфейсов всех устройств.
+Видим маршруты до Loopback интерфейсов всех устройств, в том числе три маршрута через три лифа до Spine02.
 
 На Spine01 проверим таблицу маршрутизации IPv6:
 ```
@@ -423,17 +383,18 @@ Displaying 6 of 9 IPv6 routing table entries
 
  C        fdcd:c467:a7d3:1::1/128 [0/0]
            via Loopback0, directly connected
- O3       fdcd:c467:a7d3:1::2/128 [110/1020]
+ I L1     fdcd:c467:a7d3:1::2/128 [115/30]
            via fe80::3, Ethernet1
- O3       fdcd:c467:a7d3:1::3/128 [110/1010]
-           via fe80::3, Ethernet1
- O3       fdcd:c467:a7d3:1::4/128 [110/1010]
            via fe80::4, Ethernet2
- O3       fdcd:c467:a7d3:1::5/128 [110/1010]
+           via fe80::5, Ethernet3
+ I L1     fdcd:c467:a7d3:1::3/128 [115/20]
+           via fe80::3, Ethernet1
+ I L1     fdcd:c467:a7d3:1::4/128 [115/20]
+           via fe80::4, Ethernet2
+ I L1     fdcd:c467:a7d3:1::5/128 [115/20]
            via fe80::5, Ethernet3
  C        fdcd:c467:a7d3:1:1::1/128 [0/0]
            via Loopback1, directly connected
-
 ```
 Так же видим маршруты до Loopback интерфейсов всех устройств.
 
@@ -442,103 +403,40 @@ Displaying 6 of 9 IPv6 routing table entries
 ```
 Spine01#ping 10.0.0.3
 PING 10.0.0.3 (10.0.0.3) 72(100) bytes of data.
-80 bytes from 10.0.0.3: icmp_seq=1 ttl=64 time=2.69 ms
-80 bytes from 10.0.0.3: icmp_seq=2 ttl=64 time=2.54 ms
-80 bytes from 10.0.0.3: icmp_seq=3 ttl=64 time=2.03 ms
-80 bytes from 10.0.0.3: icmp_seq=4 ttl=64 time=3.18 ms
-80 bytes from 10.0.0.3: icmp_seq=5 ttl=64 time=4.56 ms
+80 bytes from 10.0.0.3: icmp_seq=1 ttl=64 time=2.23 ms
+80 bytes from 10.0.0.3: icmp_seq=2 ttl=64 time=2.31 ms
+80 bytes from 10.0.0.3: icmp_seq=3 ttl=64 time=2.48 ms
+80 bytes from 10.0.0.3: icmp_seq=4 ttl=64 time=2.27 ms
+80 bytes from 10.0.0.3: icmp_seq=5 ttl=64 time=1.96 ms
 --- 10.0.0.3 ping statistics ---
-5 packets transmitted, 5 received, 0% packet loss, time 14ms
-rtt min/avg/max/mdev = 2.028/3.001/4.563/0.863 ms, ipg/ewma 3.521/2.904 ms
+5 packets transmitted, 5 received, 0% packet loss, time 10ms
+rtt min/avg/max/mdev = 1.961/2.249/2.477/0.166 ms, ipg/ewma 2.463/2.233 ms
 
 Spine01#ping fdcd:c467:a7d3:1:0::3
 PING fdcd:c467:a7d3:1:0::3(fdcd:c467:a7d3:1::3) 52 data bytes
-60 bytes from fdcd:c467:a7d3:1::3: icmp_seq=1 ttl=64 time=3.48 ms
-60 bytes from fdcd:c467:a7d3:1::3: icmp_seq=2 ttl=64 time=3.94 ms
-60 bytes from fdcd:c467:a7d3:1::3: icmp_seq=3 ttl=64 time=3.41 ms
-60 bytes from fdcd:c467:a7d3:1::3: icmp_seq=4 ttl=64 time=3.09 ms
-60 bytes from fdcd:c467:a7d3:1::3: icmp_seq=5 ttl=64 time=4.10 ms
+60 bytes from fdcd:c467:a7d3:1::3: icmp_seq=1 ttl=64 time=3.39 ms
+60 bytes from fdcd:c467:a7d3:1::3: icmp_seq=2 ttl=64 time=3.05 ms
+60 bytes from fdcd:c467:a7d3:1::3: icmp_seq=3 ttl=64 time=2.59 ms
+60 bytes from fdcd:c467:a7d3:1::3: icmp_seq=4 ttl=64 time=2.83 ms
+60 bytes from fdcd:c467:a7d3:1::3: icmp_seq=5 ttl=64 time=4.39 ms
 --- fdcd:c467:a7d3:1:0::3 ping statistics ---
-5 packets transmitted, 5 received, 0% packet loss, time 15ms
-rtt min/avg/max/mdev = 3.089/3.604/4.104/0.368 ms, ipg/ewma 3.813/3.545 ms
-
+5 packets transmitted, 5 received, 0% packet loss, time 13ms
+rtt min/avg/max/mdev = 2.590/3.249/4.389/0.628 ms, ipg/ewma 3.185/3.349 ms
 ```
 
-Проверим IP связанность между Spine01 и Leaf02 по IPv4 и IPv6:
-```
-Spine01#ping 10.0.0.4
-PING 10.0.0.4 (10.0.0.4) 72(100) bytes of data.
-80 bytes from 10.0.0.4: icmp_seq=1 ttl=64 time=3.39 ms
-80 bytes from 10.0.0.4: icmp_seq=2 ttl=64 time=3.38 ms
-80 bytes from 10.0.0.4: icmp_seq=3 ttl=64 time=3.15 ms
-80 bytes from 10.0.0.4: icmp_seq=4 ttl=64 time=2.80 ms
-80 bytes from 10.0.0.4: icmp_seq=5 ttl=64 time=2.63 ms
---- 10.0.0.4 ping statistics ---
-5 packets transmitted, 5 received, 0% packet loss, time 14ms
-rtt min/avg/max/mdev = 2.633/3.072/3.394/0.307 ms, ipg/ewma 3.550/3.209 ms
-
-Spine01#ping fdcd:c467:a7d3:1:0::4
-PING fdcd:c467:a7d3:1:0::4(fdcd:c467:a7d3:1::4) 52 data bytes
-60 bytes from fdcd:c467:a7d3:1::4: icmp_seq=1 ttl=64 time=3.84 ms
-60 bytes from fdcd:c467:a7d3:1::4: icmp_seq=2 ttl=64 time=4.89 ms
-60 bytes from fdcd:c467:a7d3:1::4: icmp_seq=3 ttl=64 time=3.35 ms
-60 bytes from fdcd:c467:a7d3:1::4: icmp_seq=4 ttl=64 time=2.67 ms
-60 bytes from fdcd:c467:a7d3:1::4: icmp_seq=5 ttl=64 time=2.65 ms
---- fdcd:c467:a7d3:1:0::4 ping statistics ---
-5 packets transmitted, 5 received, 0% packet loss, time 18ms
-rtt min/avg/max/mdev = 2.645/3.479/4.893/0.837 ms, ipg/ewma 4.426/3.605 ms
-
-```
-
-Проверим IP связанность между Spine01 и Leaf03 по IPv4 и IPv6:
-```
-Spine01#ping 10.0.0.5
-PING 10.0.0.5 (10.0.0.5) 72(100) bytes of data.
-80 bytes from 10.0.0.5: icmp_seq=1 ttl=64 time=4.64 ms
-80 bytes from 10.0.0.5: icmp_seq=2 ttl=64 time=5.75 ms
-80 bytes from 10.0.0.5: icmp_seq=3 ttl=64 time=2.58 ms
-80 bytes from 10.0.0.5: icmp_seq=4 ttl=64 time=2.94 ms
-80 bytes from 10.0.0.5: icmp_seq=5 ttl=64 time=4.49 ms
---- 10.0.0.5 ping statistics ---
-5 packets transmitted, 5 received, 0% packet loss, time 24ms
-rtt min/avg/max/mdev = 2.579/4.078/5.745/1.166 ms, ipg/ewma 6.120/4.329 ms
-
-Spine01#ping fdcd:c467:a7d3:1:0::5
-PING fdcd:c467:a7d3:1:0::5(fdcd:c467:a7d3:1::5) 52 data bytes
-60 bytes from fdcd:c467:a7d3:1::5: icmp_seq=1 ttl=64 time=3.11 ms
-60 bytes from fdcd:c467:a7d3:1::5: icmp_seq=2 ttl=64 time=2.64 ms
-60 bytes from fdcd:c467:a7d3:1::5: icmp_seq=3 ttl=64 time=4.16 ms
-60 bytes from fdcd:c467:a7d3:1::5: icmp_seq=4 ttl=64 time=2.50 ms
-60 bytes from fdcd:c467:a7d3:1::5: icmp_seq=5 ttl=64 time=2.07 ms
---- fdcd:c467:a7d3:1:0::5 ping statistics ---
-5 packets transmitted, 5 received, 0% packet loss, time 16ms
-rtt min/avg/max/mdev = 2.070/2.893/4.160/0.714 ms, ipg/ewma 4.073/2.971 ms
-```
-
-Проверим IP связанность между Spine01 и Spine02 по IPv4 и IPv6:
+Проверим IP связанность между Spine01 и Spine02/Leaf02/Leaf03 по IPv4 и IPv6 (вывод сокращён):
 ```
 Spine01#ping 10.0.0.2
-PING 10.0.0.2 (10.0.0.2) 72(100) bytes of data.
-80 bytes from 10.0.0.2: icmp_seq=1 ttl=63 time=11.0 ms
-80 bytes from 10.0.0.2: icmp_seq=2 ttl=63 time=5.81 ms
-80 bytes from 10.0.0.2: icmp_seq=3 ttl=63 time=2.62 ms
-80 bytes from 10.0.0.2: icmp_seq=4 ttl=63 time=2.68 ms
-80 bytes from 10.0.0.2: icmp_seq=5 ttl=63 time=3.46 ms
---- 10.0.0.2 ping statistics ---
-5 packets transmitted, 5 received, 0% packet loss, time 39ms
-rtt min/avg/max/mdev = 2.620/5.105/10.952/3.144 ms, ipg/ewma 9.781/7.883 ms
-
 Spine01#ping fdcd:c467:a7d3:1:0::2
-PING fdcd:c467:a7d3:1:0::2(fdcd:c467:a7d3:1::2) 52 data bytes
-60 bytes from fdcd:c467:a7d3:1::2: icmp_seq=1 ttl=63 time=7.83 ms
-60 bytes from fdcd:c467:a7d3:1::2: icmp_seq=2 ttl=63 time=6.42 ms
-60 bytes from fdcd:c467:a7d3:1::2: icmp_seq=3 ttl=63 time=4.39 ms
-60 bytes from fdcd:c467:a7d3:1::2: icmp_seq=4 ttl=63 time=2.94 ms
-60 bytes from fdcd:c467:a7d3:1::2: icmp_seq=5 ttl=63 time=2.64 ms
---- fdcd:c467:a7d3:1:0::2 ping statistics ---
-5 packets transmitted, 5 received, 0% packet loss, time 31ms
-rtt min/avg/max/mdev = 2.644/4.844/7.830/2.003 ms, ipg/ewma 7.859/6.199 ms
+
+Spine01#ping 10.0.0.4
+Spine01#ping fdcd:c467:a7d3:1:0::4
+
+Spine01#ping 10.0.0.5
+Spine01#ping fdcd:c467:a7d3:1:0::5
 ```
+
+
 
 
 Проверим работоспособность BFD:
@@ -548,9 +446,9 @@ VRF name: default
 -----------------
 DstAddr       MyDisc    YourDisc  Interface/Transport    Type           LastUp
 --------- ----------- ----------- -------------------- ------- ----------------
-10.2.1.1  1865089838  1286053506        Ethernet1(22)  normal   04/21/26 19:45
-10.2.1.3   458622646   430066288        Ethernet2(23)  normal   04/21/26 19:45
-10.2.1.5  3727709014  2057504065        Ethernet3(20)  normal   04/21/26 19:45
+10.2.1.1  1266665523  2462916651        Ethernet1(16)  normal   04/29/26 08:44
+10.2.1.3  3299483478     2328633        Ethernet2(22)  normal   05/01/26 13:01
+10.2.1.5   327267910  2137237654        Ethernet3(23)  normal   05/01/26 13:01
 
    LastDown            LastDiag    State
 -------------- ------------------- -----
@@ -560,9 +458,9 @@ DstAddr       MyDisc    YourDisc  Interface/Transport    Type           LastUp
 
 DstAddr     MyDisc   YourDisc Interface/Transport   Type         LastUp LastDown
 ------- ---------- ---------- ------------------- ------ -------------- --------
-fe80::3 2395735173  862626535       Ethernet1(22) normal 04/21/26 20:09       NA
-fe80::4   97786484 3960497956       Ethernet2(23) normal 04/22/26 11:44       NA
-fe80::5 2680906623 2996531171       Ethernet3(20) normal 04/22/26 11:45       NA
+fe80::3 2822492478  406306921       Ethernet1(16) normal 04/29/26 08:44       NA
+fe80::4 3773810009  499073101       Ethernet2(22) normal 05/01/26 13:01       NA
+fe80::5  959282347 1584485204       Ethernet3(23) normal 05/01/26 13:01       NA
 
         LastDiag    State
 ------------------- -----
@@ -572,112 +470,119 @@ fe80::5 2680906623 2996531171       Ethernet3(20) normal 04/22/26 11:45       NA
 ```
 
 
-Для примера выведем из работы Spine01, например для обслуживания.
-Проверим таблицу маршрутизации на Spine01:
-```
-Spine01#show ip route
-VRF: default
-Gateway of last resort is not set
 
- C        10.0.0.1/32
-           directly connected, Loopback0
- O        10.0.0.2/32 [110/2010]
-           via 10.2.1.1, Ethernet1
-           via 10.2.1.3, Ethernet2
-           via 10.2.1.5, Ethernet3
- O        10.0.0.3/32 [110/1010]
-           via 10.2.1.1, Ethernet1
- O        10.0.0.4/32 [110/1010]
-           via 10.2.1.3, Ethernet2
- O        10.0.0.5/32 [110/1010]
-           via 10.2.1.5, Ethernet3
- C        10.1.0.1/32
-           directly connected, Loopback1
- C        10.2.1.0/31
-           directly connected, Ethernet1
- C        10.2.1.2/31
-           directly connected, Ethernet2
- C        10.2.1.4/31
-           directly connected, Ethernet3
- O        10.2.2.0/31 [110/2000]
-           via 10.2.1.1, Ethernet1
- O        10.2.2.2/31 [110/2000]
-           via 10.2.1.3, Ethernet2
- O        10.2.2.4/31 [110/2000]
-           via 10.2.1.5, Ethernet3
+Выведем из работы Spine01, например для обслуживания.
+Посмотрим LSDB на Spine01:
+```
+Spine01#show isis database
+IS-IS Instance: UNDERISIS VRF: default
+  IS-IS Level 1 Link State Database
+    LSPID                   Seq Num  Cksum  Life Length IS  Received LSPID        Flags
+    Spine01.00-00               325  29663  1087    209 L2  0100.0000.0001.00-00  <>
+    Spine02.00-00               322  32119   991    209 L2  0100.0000.0002.00-00  <>
+    Leaf01.00-00                310  29838   618    184 L2  0100.0000.0003.00-00  <>
+    Leaf02.00-00                322  31840  1105    184 L2  0100.0000.0004.00-00  <>
+    Leaf03.00-00                319  64896   749    184 L2  0100.0000.0005.00-00  <>
+  IS-IS Level 2 Link State Database
+    LSPID                   Seq Num  Cksum  Life Length IS  Received LSPID        Flags
+    Spine01.00-00               342  42317  1087    364 L2  0100.0000.0001.00-00  <>
+    Spine02.00-00               340  34174   991    364 L2  0100.0000.0002.00-00  <>
+    Leaf01.00-00                326  16681   945    348 L2  0100.0000.0003.00-00  <>
+    Leaf02.00-00                333  53561   724    348 L2  0100.0000.0004.00-00  <>
+    Leaf03.00-00                331   5398   734    348 L2  0100.0000.0005.00-00  <>
 ```
 
 Проверим доступные пути с Leaf03 до Leaf01:
 ```
 Leaf03#show ip route 10.0.0.3
 VRF: default
- O        10.0.0.3/32 [110/2010]
+I L1     10.0.0.3/32 [115/30]
            via 10.2.1.4, Ethernet1
            via 10.2.2.4, Ethernet2
 ```
 Видим ECMP маршрут через оба спайна.
 
-На Spine01 увеличиваем метрики до максимума:
+Выполним трассировку с Leaf03 до Leaf01:
+```
+Leaf03#traceroute 10.0.0.3
+traceroute to 10.0.0.3 (10.0.0.3), 30 hops max, 60 byte packets
+ 1  10.2.1.4 (10.2.1.4)  4.349 ms  4.692 ms  4.645 ms
+ 2  10.0.0.3 (10.0.0.3)  19.907 ms  19.897 ms  22.414 ms
+```
+Видим, что маршрут идёт через Spine01.
+
+
+На Spine01 установим в IS-IS бит Overload:
 ```
 Spine01(config)#
-router ospf 1
-    max-metric router-lsa
+router isis UNDERISIS
+    set-overload-bit
 ```
 
-Проверяем таблицу маршрутизации на Spine01:
+Посмотрим LSDB на Spine01:
 ```
-Spine01#show ip route
-VRF: default
-Gateway of last resort is not set
-
- C        10.0.0.1/32
-           directly connected, Loopback0
- O        10.0.0.2/32 [110/66545]
-           via 10.2.1.1, Ethernet1
-           via 10.2.1.3, Ethernet2
-           via 10.2.1.5, Ethernet3
- O        10.0.0.3/32 [110/65545]
-           via 10.2.1.1, Ethernet1
- O        10.0.0.4/32 [110/65545]
-           via 10.2.1.3, Ethernet2
- O        10.0.0.5/32 [110/65545]
-           via 10.2.1.5, Ethernet3
- C        10.1.0.1/32
-           directly connected, Loopback1
- C        10.2.1.0/31
-           directly connected, Ethernet1
- C        10.2.1.2/31
-           directly connected, Ethernet2
- C        10.2.1.4/31
-           directly connected, Ethernet3
- O        10.2.2.0/31 [110/66535]
-           via 10.2.1.1, Ethernet1
- O        10.2.2.2/31 [110/66535]
-           via 10.2.1.3, Ethernet2
- O        10.2.2.4/31 [110/66535]
-           via 10.2.1.5, Ethernet3
+Spine01#show isis database
+IS-IS Instance: UNDERISIS VRF: default
+  IS-IS Level 1 Link State Database
+    LSPID                   Seq Num  Cksum  Life Length IS  Received LSPID        Flags
+    Spine01.00-00               326  23625  1193    209 L2  0100.0000.0001.00-00  <DBOverload>
+    Spine02.00-00               323  55422  1077    209 L2  0100.0000.0002.00-00  <>
+    Leaf01.00-00                310  29838   471    184 L2  0100.0000.0003.00-00  <>
+    Leaf02.00-00                322  31840   959    184 L2  0100.0000.0004.00-00  <>
+    Leaf03.00-00                319  64896   602    184 L2  0100.0000.0005.00-00  <>
+  IS-IS Level 2 Link State Database
+    LSPID                   Seq Num  Cksum  Life Length IS  Received LSPID        Flags
+    Spine01.00-00               343  31790  1193    209 L2  0100.0000.0001.00-00  <DBOverload>
+    Spine02.00-00               340  34174   844    364 L2  0100.0000.0002.00-00  <>
+    Leaf01.00-00                326  16681   799    348 L2  0100.0000.0003.00-00  <>
+    Leaf02.00-00                333  53561   578    348 L2  0100.0000.0004.00-00  <>
+    Leaf03.00-00                331   5398   588    348 L2  0100.0000.0005.00-00  <>
 ```
+Видим, что бит Overload установлен на Spine01.
 
-Видим увеличенные значения метрик.
+
+Посмотрим LSDB на Leaf03:
+```
+Leaf03#show isis database
+IS-IS Instance: UNDERISIS VRF: default
+  IS-IS Level 1 Link State Database
+    LSPID                   Seq Num  Cksum  Life Length IS  Received LSPID        Flags
+    Spine01.00-00               326  23625  1150    209 L2  0100.0000.0001.00-00  <DBOverload>
+    Spine02.00-00               323  55422  1035    209 L2  0100.0000.0002.00-00  <>
+    Leaf01.00-00                310  29838   429    184 L2  0100.0000.0003.00-00  <>
+    Leaf02.00-00                322  31840   916    184 L2  0100.0000.0004.00-00  <>
+    Leaf03.00-00                319  64896   560    184 L2  0100.0000.0005.00-00  <>
+  IS-IS Level 2 Link State Database
+    LSPID                   Seq Num  Cksum  Life Length IS  Received LSPID        Flags
+    Spine01.00-00               343  31790  1150    209 L2  0100.0000.0001.00-00  <DBOverload>
+    Spine02.00-00               340  34174   802    364 L2  0100.0000.0002.00-00  <>
+    Leaf01.00-00                326  16681   756    348 L2  0100.0000.0003.00-00  <>
+    Leaf02.00-00                333  53561   536    348 L2  0100.0000.0004.00-00  <>
+    Leaf03.00-00                331   5398   546    348 L2  0100.0000.0005.00-00  <>
+```
+Так же видим, что бит Overload установлен на Spine01.
+
+
 
 Проверим доступные пути с Leaf03 до Leaf01:
 ```
 Leaf03#show ip route 10.0.0.3
 VRF: default
- O        10.0.0.3/32 [110/2010]
+ I L1     10.0.0.3/32 [115/30]
            via 10.2.2.4, Ethernet2
 ```
 Видим только один маршрут через Spine02.
+
 
 Выполним трассировку:
 ```
 Leaf03#traceroute 10.0.0.3
 traceroute to 10.0.0.3 (10.0.0.3), 30 hops max, 60 byte packets
- 1  10.2.2.4 (10.2.2.4)  3.465 ms  4.381 ms  4.757 ms
- 2  10.0.0.3 (10.0.0.3)  11.585 ms  12.637 ms  12.711 ms
+ 1  10.2.2.4 (10.2.2.4)  5.702 ms  6.476 ms  13.435 ms
+ 2  10.0.0.3 (10.0.0.3)  13.558 ms  15.910 ms  16.043 ms
 ```
-Видим, что трафик идет через Spine02.
+Видим, что теперь трафик идет через Spine02.
 
 
-### На этом настройка OSPF закончена.
+### На этом настройка IS-IS закончена.
 
