@@ -297,7 +297,7 @@ UNDERISIS default  Leaf03           L1L2 Ethernet3          P2P               UP
   Supported Address Families: IPv4, IPv6
   Neighbor Supported Address Families: IPv4, IPv6
 ```
-Видим, что соседские отношения установлены. У всех состояние UP. Уровень отношений смешанный L1/L2. BFD вклюен. Тип линков p2p.
+Видим, что соседские отношения установлены. У всех состояние UP. Уровень отношений смешанный L1/L2. BFD включен. Тип линков p2p.
 
 
 Посмотрим LSDB:
@@ -472,6 +472,7 @@ fe80::5  959282347 1584485204       Ethernet3(23) normal 05/01/26 13:01       NA
 
 
 Выведем из работы Spine01, например для обслуживания.
+
 Посмотрим LSDB на Spine01:
 ```
 Spine01#show isis database
