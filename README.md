@@ -5,3 +5,5 @@
 - [Lab02. Построение Underlay сети (OSPF).](Lab02/)
 
 - [Lab03. Построение Underlay сети (IS-IS).](Lab03/)
+
+- [Lab04. Построение Underlay сети (BGP).](Lab03/)
