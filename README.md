@@ -6,4 +6,4 @@
 
 - [Lab03. Построение Underlay сети (IS-IS).](Lab03/)
 
-- [Lab04. Построение Underlay сети (BGP).](Lab03/)
+- [Lab04. Построение Underlay сети (BGP).](Lab04/)
